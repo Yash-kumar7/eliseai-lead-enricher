@@ -35,7 +35,12 @@ function enrichCurrentRow() {
 }
 
 function onLeadAdded(e) {
-  enrichRow(e.source.getActiveSheet(), e.range.getRow());
+  const sheet = e.source.getActiveSheet();
+  const row = e.range.getRow();
+  if (row <= 1) return;
+  const vals = sheet.getRange(row, 1, 1, 6).getValues()[0];
+  if (vals.some(v => !v)) return;
+  enrichRow(sheet, row);
 }
 
 function enrichRow(sheet, row) {

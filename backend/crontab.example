@@ -1,0 +1,15 @@
+# EliseAI lead enricher: scheduled run
+#
+# Drop lead CSVs into backend/inbox/ before this fires.
+# Enriched output lands in backend/outbox/enriched_<name>_<ts>.csv.
+# Processed inputs are moved to backend/inbox/processed/.
+#
+# Install:
+#   crontab -e
+#   (paste the line below, edit the project path and Node bin path)
+#
+# Daily at 9am local time:
+0 9 * * * cd /Users/yashkumar/Desktop/Assignment && /usr/local/bin/npm --prefix backend run cron >> /tmp/eliseai-cron.log 2>&1
+
+# Every 15 minutes (polling):
+# */15 * * * * cd /Users/yashkumar/Desktop/Assignment && /usr/local/bin/npm --prefix backend run cron >> /tmp/eliseai-cron.log 2>&1

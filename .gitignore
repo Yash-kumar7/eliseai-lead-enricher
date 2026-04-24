@@ -1,0 +1,16 @@
+.claude/
+single_lead.csv
+test_leads.csv
+node_modules
+dist
+build
+.cache
+.env
+.env.local
+.DS_Store
+*.log
+backend/outbox/*.csv
+backend/inbox/*.csv
+!backend/inbox/.gitkeep
+!backend/outbox/.gitkeep
+!backend/sample_leads.csv

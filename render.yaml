@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: eliseai-lead-enricher
+    runtime: node
+    buildCommand: npm install && npm run build --workspace=@eliseai/frontend
+    startCommand: NODE_ENV=production npm run start --workspace=@eliseai/backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        generateValue: false
+      - key: CENSUS_KEY
+        sync: false
+      - key: NEWSAPI_KEY
+        sync: false
+      - key: OPENWEATHER_KEY
+        sync: false
+      - key: WALKSCORE_KEY
+        sync: false
+      - key: FRED_KEY
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: LLM_BASE_URL
+        sync: false
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        sync: false

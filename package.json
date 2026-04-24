@@ -1,0 +1,22 @@
+{
+  "name": "eliseai-lead-enricher",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EliseAI GTM inbound lead enrichment tool",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=@eliseai/backend",
+    "dev:frontend": "npm run dev --workspace=@eliseai/frontend",
+    "dev": "npm-run-all -p dev:backend dev:frontend",
+    "build": "npm run build --workspaces --if-present",
+    "cron": "npm run cron --workspace=@eliseai/backend"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  }
+}

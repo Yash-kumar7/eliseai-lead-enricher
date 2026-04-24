@@ -5,7 +5,6 @@ export interface Lead {
   propertyAddress: string;
   city: string;
   state: string;
-  country?: string;
 }
 
 export interface CensusData {

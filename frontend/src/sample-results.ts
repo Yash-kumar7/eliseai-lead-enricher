@@ -14,7 +14,6 @@ export const SAMPLE_ENRICHED: EnrichedLead[] = [
       propertyAddress: "600 Congress Ave",
       city: "Austin",
       state: "TX",
-      country: "US",
     },
     enrichment: {
       census: {
@@ -86,7 +85,6 @@ export const SAMPLE_ENRICHED: EnrichedLead[] = [
       propertyAddress: "1717 Rhode Island Ave NW",
       city: "Washington",
       state: "DC",
-      country: "US",
     },
     enrichment: {
       census: {
@@ -158,7 +156,6 @@ export const SAMPLE_ENRICHED: EnrichedLead[] = [
       propertyAddress: "101 W Broadway",
       city: "San Diego",
       state: "CA",
-      country: "US",
     },
     enrichment: {
       census: {
@@ -230,7 +227,6 @@ export const SAMPLE_ENRICHED: EnrichedLead[] = [
       propertyAddress: "2 Greenway Plaza",
       city: "Houston",
       state: "TX",
-      country: "US",
     },
     enrichment: {
       census: {
@@ -292,7 +288,6 @@ export const SAMPLE_ENRICHED: EnrichedLead[] = [
       propertyAddress: "42 Main St",
       city: "Tupelo",
       state: "MS",
-      country: "US",
     },
     enrichment: {
       census: {

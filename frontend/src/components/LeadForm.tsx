@@ -13,7 +13,6 @@ const EMPTY: Lead = {
   propertyAddress: "",
   city: "",
   state: "",
-  country: "US",
 };
 
 export function LeadForm({ disabled, onSubmit }: Props) {

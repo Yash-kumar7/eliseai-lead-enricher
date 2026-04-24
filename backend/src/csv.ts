@@ -39,7 +39,6 @@ export function parseLeadsCsv(text: string): Lead[] {
     propertyAddress: (row.propertyAddress ?? "").trim(),
     city: (row.city ?? "").trim(),
     state: (row.state ?? "").trim(),
-    country: (row.country ?? "").trim() || undefined,
   }));
 }
 

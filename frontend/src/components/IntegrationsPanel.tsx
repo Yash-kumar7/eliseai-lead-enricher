@@ -6,8 +6,8 @@ const SHEET_SCRIPT = (webhookUrl: string) => `const WEBHOOK_URL = "${webhookUrl}
 const WEBHOOK_SECRET = "YOUR_WEBHOOK_SECRET";
 
 const COL = {
-  name: 1, email: 2, company: 3, address: 4, city: 5, state: 6,
-  score: 7, tier: 8, emailSubject: 9, emailBody: 10,
+  name: 1, email: 2, company: 3, address: 4, city: 5, state: 6, country: 7,
+  score: 8, tier: 9, emailSubject: 10, emailBody: 11,
 };
 
 function onOpen() {
@@ -44,15 +44,15 @@ function onLeadAdded(e) {
 }
 
 function enrichRow(sheet, row) {
-  const [name, email, company, address, city, state] =
-    sheet.getRange(row, 1, 1, 6).getValues()[0];
+  const [name, email, company, address, city, state, country] =
+    sheet.getRange(row, 1, 1, 7).getValues()[0];
   if (!name || !email || !company || !address || !city || !state) return;
   if (sheet.getRange(row, COL.score).getValue()) return;
   sheet.getRange(row, COL.score).setValue("...");
   const res = UrlFetchApp.fetch(WEBHOOK_URL, {
     method: "post", contentType: "application/json",
     headers: { "x-webhook-secret": WEBHOOK_SECRET },
-    payload: JSON.stringify({ name, email, company, propertyAddress: address, city, state }),
+    payload: JSON.stringify({ name, email, company, propertyAddress: address, city, state, country }),
     muteHttpExceptions: true,
   });
   if (res.getResponseCode() !== 200) {
@@ -76,7 +76,7 @@ const WEBHOOK_SECRET = "YOUR_WEBHOOK_SECRET";
 // Form question titles must match exactly:
 const FORM_FIELDS = {
   name: "Name", email: "Email", company: "Company",
-  address: "Property Address", city: "City", state: "State",
+  address: "Property Address", city: "City", state: "State", country: "Country",
 };
 
 function onFormSubmit(e) {
@@ -87,7 +87,8 @@ function onFormSubmit(e) {
 
   const name = get(FORM_FIELDS.name), email = get(FORM_FIELDS.email),
     company = get(FORM_FIELDS.company), address = get(FORM_FIELDS.address),
-    city = get(FORM_FIELDS.city), state = get(FORM_FIELDS.state);
+    city = get(FORM_FIELDS.city), state = get(FORM_FIELDS.state),
+    country = get(FORM_FIELDS.country);
 
   if (!name || !email || !company || !address || !city || !state) return;
 
@@ -103,7 +104,7 @@ function onFormSubmit(e) {
   const res = UrlFetchApp.fetch(WEBHOOK_URL, {
     method: "post", contentType: "application/json",
     headers: { "x-webhook-secret": WEBHOOK_SECRET },
-    payload: JSON.stringify({ name, email, company, propertyAddress: address, city, state }),
+    payload: JSON.stringify({ name, email, company, propertyAddress: address, city, state, country }),
     muteHttpExceptions: true,
   });
   if (res.getResponseCode() !== 200) {
@@ -198,7 +199,7 @@ export function IntegrationsPanel() {
             </div>
           </div>
           <ol className="space-y-2">
-            <Step n={1} text="Create a Google Sheet with columns: Name | Email | Company | Property Address | City | State" />
+            <Step n={1} text="Create a Google Sheet with columns: Name | Email | Company | Property Address | City | State | Country" />
             <Step n={2} text="Extensions → Apps Script → paste the script below → Save" />
             <Step n={3} text='Set WEBHOOK_SECRET to match your environment variable' />
             <Step n={4} text="Share the sheet with your SDR. They click Lead Enricher → Enable auto-enrichment once" />
@@ -219,7 +220,7 @@ export function IntegrationsPanel() {
             </div>
           </div>
           <ol className="space-y-2">
-            <Step n={1} text="Create a Google Form with: Name, Email, Company, Property Address, City, State (all Short answer)" />
+            <Step n={1} text="Create a Google Form with: Name, Email, Company, Property Address, City, State, Country (all Short answer)" />
             <Step n={2} text="Responses tab → Link to Sheets → create new sheet" />
             <Step n={3} text="In that sheet: Extensions → Apps Script → paste script below → Save" />
             <Step n={4} text='Triggers → Add trigger → onFormSubmit | From spreadsheet | On form submit' />

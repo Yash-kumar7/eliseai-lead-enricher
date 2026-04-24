@@ -14,7 +14,7 @@
     "@eliseai/shared": "*",
     "@fastify/cors": "^9.0.1",
     "@fastify/multipart": "^8.3.0",
-    "@fastify/static": "^9.1.3",
+    "@fastify/static": "^8.0.0",
     "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
     "openai": "^4.104.0",

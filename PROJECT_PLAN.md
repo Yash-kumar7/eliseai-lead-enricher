@@ -20,7 +20,7 @@ If Hot tier doesn't outperform baseline in pilot, the **scoring weights are wron
 
 ### Week 1: MVP validation (internal, zero risk)
 
-- Freeze MVP (this repo).
+- Freeze MVP (this repo). Deployed at https://eliseai-lead-enricher.onrender.com.
 - Pull 50 historic inbound leads from CRM (~3 months old, so we know the outcomes).
 - Run tool on all 50 offline.
 - **Compare against ground truth:**
@@ -43,6 +43,7 @@ If Hot tier doesn't outperform baseline in pilot, the **scoring weights are wron
 - **Integration work (parallel track with RevOps):**
   - Wire Salesforce/HubSpot webhook → `scheduled-run.ts` → CRM write back of score + tier (read only to the rep).
   - Logging of adoption (drafts opened, copied, sent).
+  - Google Sheets auto-enrichment already shipped: onEdit trigger fires when all 6 fields are filled, writes score + tier + email draft back to the row.
 - Weekly retro. Manager gets a dashboard showing per rep usage and draft send rates.
 - **Exit criterion:** pod adoption > 70%, latency stable, no data handling issues flagged.
 
@@ -70,7 +71,7 @@ If Hot tier doesn't outperform baseline in pilot, the **scoring weights are wron
 1. **Unit level**: each enrich module has a fail soft contract: bad key → returns empty data. Verified manually by running with one key missing at a time.
 2. **Historical replay**: run tool on 50 known leads, compare tiers to actual outcomes (Week 1 above). This is the most important test.
 3. **Draft quality**: 10 random Hot tier leads, senior SDR rates each email 1 to 5 on usefulness. Target: median ≥ 4.
-4. **Load**: 50 lead batch finishes in < 10 min on free tier APIs (NewsAPI is the bottleneck).
+4. **Load**: 50 lead batch finishes in < 3 min with 5-worker concurrency (tested; NewsAPI free tier is the bottleneck at scale).
 5. **Failure injection**: break each API key in turn, verify UI still shows graceful "N/A" + enrichment warnings section.
 
 ## Risks & mitigations

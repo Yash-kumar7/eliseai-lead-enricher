@@ -1,19 +1,19 @@
 # EliseAI Lead Enricher
 
-Automated top-of-funnel SDR tool for EliseAI. Takes an inbound lead (name, email, company, property address), enriches it with **5 public APIs**, scores it against the multifamily ICP across **7 signals**, and drafts a personalized outreach email — all in under 30 seconds.
+Automated top-of-funnel SDR tool for EliseAI. Takes an inbound lead (name, email, company, property address), enriches it with **5 public APIs**, scores it against the multifamily ICP across **7 signals**, and drafts a personalized outreach email - all in under 30 seconds.
 
 Built for the GTM Engineer practical assignment.
 
 ## What it does
 
-1. **Input** — single lead form, CSV batch (≤50 rows), scheduled inbox (daily cron), or Google Sheets trigger
-2. **Enrich** — 5 free APIs fire in parallel per lead:
-   - **US Census Geocoder + ACS 5-year** — population, renter %, median rent, median HH income (no key required)
-   - **NewsAPI** — 3 most recent headlines about the company
-   - **Wikipedia REST** — company page existence + summary
-   - **OpenWeather** — current conditions at city (icebreaker, not scored)
-   - **FRED** (Federal Reserve) — national rental vacancy rate
-3. **Score** — 0–100 weighted for multifamily AI fit:
+1. **Input** - single lead form, CSV batch (≤50 rows), scheduled inbox (daily cron), or Google Sheets trigger
+2. **Enrich** - 5 free APIs fire in parallel per lead:
+   - **US Census Geocoder + ACS 5-year** - population, renter %, median rent, median HH income (no key required)
+   - **NewsAPI** - 3 most recent headlines about the company
+   - **Wikipedia REST** - company page existence + summary
+   - **OpenWeather** - current conditions at city (icebreaker, not scored)
+   - **FRED** (Federal Reserve) - national rental vacancy rate
+3. **Score** - 0–100 weighted for multifamily AI fit:
 
    | Signal | Points |
    |---|---|
@@ -28,8 +28,8 @@ Built for the GTM Engineer practical assignment.
 
    Tiers: **Hot ≥75 · Warm 50–74 · Cold <50**
 
-4. **Draft email** — deterministic template by default; upgrades to any OpenAI-compatible LLM via three env vars
-5. **Output** — scored table, per-lead drawer with breakdown + editable email + copy button, CSV export
+4. **Draft email** - deterministic template by default; upgrades to any OpenAI-compatible LLM via three env vars
+5. **Output** - scored table, per-lead drawer with breakdown + editable email + copy button, CSV export
 
 ## Quick start
 
@@ -55,8 +55,8 @@ Open `http://localhost:5200`, click **Try the demo**, then **Load sample leads**
 | NewsAPI | Yes | https://newsapi.org/register |
 | OpenWeather | Yes | https://home.openweathermap.org/users/sign_up |
 | FRED | Optional | https://fred.stlouisfed.org/docs/api/api_key.html |
-| Census | No — keyless | https://api.census.gov/data/key_signup.html |
-| Wikipedia | No — keyless | — |
+| Census | No - keyless | https://api.census.gov/data/key_signup.html |
+| Wikipedia | No - keyless | - |
 
 ## LLM email drafting (optional)
 
@@ -72,15 +72,14 @@ Works with any OpenAI-compatible endpoint:
 
 | Provider | `LLM_BASE_URL` | Model example |
 |---|---|---|
-| OpenAI | `https://api.openai.com/v1` | `gpt-4o-mini` |
-| Anthropic | `https://api.anthropic.com/v1` | `claude-haiku-4-5-20251001` |
+| OpenAI | `https://api.openai.com/v1` | `gpt-5.4` |
+| Anthropic | `https://api.anthropic.com/v1` | `claude-sonnet-4-6` |
 | Groq | `https://api.groq.com/openai/v1` | `llama-3.3-70b-versatile` |
-| Fireworks.ai | `https://api.fireworks.ai/inference/v1` | `accounts/fireworks/models/llama-v3p1-70b-instruct` |
-| Together AI | `https://api.together.xyz/v1` | `meta-llama/Llama-3.3-70B-Instruct-Turbo` |
+| Fireworks.ai | `https://api.fireworks.ai/inference/v1` | `fireworks/qwen3p6-plus` |
 | Ollama (local) | `http://localhost:11434/v1` | `llama3.1` |
 | Ollama (cloud) | `https://ollama.com/v1` | `gemma4:31b-cloud` |
 
-On any LLM failure the pipeline silently falls back to the template — leads always get a drafted email.
+On any LLM failure the pipeline silently falls back to the template - leads always get a drafted email.
 
 ## Scheduled (cron) mode
 
@@ -99,8 +98,8 @@ npm run cron --workspace=@eliseai/backend
 
 See the **Integrations** tab in the UI for ready-to-paste Apps Script snippets:
 
-- **Per-SDR sheet** — `onEdit` trigger fires when a new row is added, enrichment writes scores + email draft back to the same row
-- **Team form** — `onFormSubmit` trigger processes Google Form submissions automatically
+- **Per-SDR sheet** - `onEdit` trigger fires when a new row is added, enrichment writes scores + email draft back to the same row
+- **Team form** - `onFormSubmit` trigger processes Google Form submissions automatically
 
 ## Architecture
 
@@ -116,7 +115,7 @@ Key files:
 
 | File | Purpose |
 |---|---|
-| `backend/src/pipeline.ts` | Orchestrator — 5 API calls in parallel per lead |
+| `backend/src/pipeline.ts` | Orchestrator - 5 API calls in parallel per lead |
 | `backend/src/score.ts` | All scoring logic + signal weights |
 | `backend/src/outreach.ts` | Template email + LLM path |
 | `backend/src/llm/` | Provider factory (any OpenAI-compatible endpoint) |
@@ -126,11 +125,11 @@ Key files:
 
 ## Operational notes
 
-- **Fail-soft** — if one API is down, pipeline continues; affected fields are `null`; score uses remaining signals
-- **Caching** — responses cached 24h in `.cache/` keyed by request hash; reruns during demo are instant
-- **Rate limits** — NewsAPI free tier 100 req/day; batch capped at 50 leads
-- **PII** — no email bodies logged; enriched output stays on local disk
-- **Deployment** — single Render service: backend serves the built frontend in production (`NODE_ENV=production`)
+- **Fail-soft** - if one API is down, pipeline continues; affected fields are `null`; score uses remaining signals
+- **Caching** - responses cached 24h in `.cache/` keyed by request hash; reruns during demo are instant
+- **Rate limits** - NewsAPI free tier 100 req/day; batch capped at 50 leads
+- **PII** - no email bodies logged; enriched output stays on local disk
+- **Deployment** - single Render service: backend serves the built frontend in production (`NODE_ENV=production`)
 
 ## Deploy to Render
 

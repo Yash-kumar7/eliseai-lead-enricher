@@ -25,7 +25,7 @@ import {
 } from "./scheduled-run.js";
 
 const isProd = process.env.NODE_ENV === "production";
-const FRONTEND_DIST = fileURLToPath(new URL("../../../frontend/dist", import.meta.url));
+const FRONTEND_DIST = fileURLToPath(new URL("../../frontend/dist", import.meta.url));
 
 const LeadSchema = z.object({
   name: z.string().min(1),

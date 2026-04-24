@@ -34,6 +34,7 @@ const LeadSchema = z.object({
   propertyAddress: z.string().min(1),
   city: z.string().min(1),
   state: z.string().min(1),
+  country: z.string().optional(),
 });
 
 async function main() {

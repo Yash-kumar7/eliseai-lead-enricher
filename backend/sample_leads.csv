@@ -1,6 +1,6 @@
-name,email,company,propertyAddress,city,state
-Sarah Chen,sarah.chen@greystar.com,Greystar,600 Congress Ave,Austin,TX
-Marcus Johnson,marcus.j@equityapartments.com,Equity Residential,1717 Rhode Island Ave NW,Washington,DC
-Priya Patel,priya@avaloncommunities.com,AvalonBay Communities,101 W Broadway,San Diego,CA
-Tom Rivera,tom.rivera@smallprop.com,Rivera Property Group,42 Main St,Tupelo,MS
-Jessica Wong,jwong@camdenliving.com,Camden Property Trust,2 Greenway Plaza,Houston,TX
+name,email,company,propertyAddress,city,state,country
+Sarah Chen,sarah.chen@greystar.com,Greystar,600 Congress Ave,Austin,TX,US
+Marcus Johnson,marcus.j@equityapartments.com,Equity Residential,1717 Rhode Island Ave NW,Washington,DC,US
+Priya Patel,priya@avaloncommunities.com,AvalonBay Communities,101 W Broadway,San Diego,CA,US
+Tom Rivera,tom.rivera@smallprop.com,Rivera Property Group,42 Main St,Tupelo,MS,US
+Jessica Wong,jwong@camdenliving.com,Camden Property Trust,2 Greenway Plaza,Houston,TX,US

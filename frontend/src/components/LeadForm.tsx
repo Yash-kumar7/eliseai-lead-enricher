@@ -13,6 +13,7 @@ const EMPTY: Lead = {
   propertyAddress: "",
   city: "",
   state: "",
+  country: "US",
 };
 
 export function LeadForm({ disabled, onSubmit }: Props) {
@@ -61,6 +62,7 @@ export function LeadForm({ disabled, onSubmit }: Props) {
           <Field label="Street address" value={lead.propertyAddress} onChange={(v) => update("propertyAddress", v)} placeholder="600 Congress Ave" autoComplete="street-address" />
           <Field label="City" value={lead.city} onChange={(v) => update("city", v)} placeholder="Austin" autoComplete="address-level2" />
           <Field label="State" value={lead.state} onChange={(v) => update("state", v)} placeholder="TX" autoComplete="address-level1" />
+          <Field label="Country" value={lead.country ?? ""} onChange={(v) => update("country", v)} placeholder="US" autoComplete="country" />
         </div>
       </fieldset>
 

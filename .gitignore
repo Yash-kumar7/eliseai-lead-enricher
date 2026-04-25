@@ -14,3 +14,4 @@ backend/inbox/*.csv
 !backend/inbox/.gitkeep
 !backend/outbox/.gitkeep
 !backend/sample_leads.csv
+presentation.html

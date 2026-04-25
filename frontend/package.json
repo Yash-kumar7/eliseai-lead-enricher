@@ -11,17 +11,19 @@
   },
   "dependencies": {
     "@eliseai/shared": "*",
+    "@posthog/react": "^1.9.0",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.87",
     "clsx": "^2.1.1",
     "lucide-react": "^0.400.0",
     "papaparse": "^5.4.1",
+    "posthog-js": "^1.372.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "*",
-    "@esbuild/linux-x64": "*"
+    "@esbuild/linux-x64": "*",
+    "@rollup/rollup-linux-x64-gnu": "*"
   },
   "devDependencies": {
     "@types/papaparse": "^5.3.14",
